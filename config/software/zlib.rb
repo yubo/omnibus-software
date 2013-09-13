@@ -27,41 +27,11 @@ source :url => "http://downloads.sourceforge.net/project/libpng/zlib/1.2.6/zlib-
        :md5 => "618e944d7c7cd6521551e30b32322f4a"
 
 relative_path "zlib-1.2.6"
-configure_env =
-  case platform
-  when "aix"
-    {
-      "LDFLAGS" => "-Wl,-blibpath:#{install_dir}/embedded/lib:/usr/lib:/lib -L#{install_dir}/embedded/lib",
-      "CFLAGS" => "-I#{install_dir}/embedded/include"
-    }
-  when "mac_os_x"
-    {
-      "LDFLAGS" => "-R#{install_dir}/embedded/lib -L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-      "CFLAGS" => "-I#{install_dir}/embedded/include -L#{install_dir}/embedded/lib"
-    }
-  when "solaris2"
-    if Omnibus.config.solaris_compiler == "studio"
-    {
-      "LDFLAGS" => "-R#{install_dir}/embedded/lib -L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include -static-libgcc",
-      "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include -DNO_VIZ"
-    }
-    elsif Omnibus.config.solaris_compiler == "gcc"
-    {
-      "LDFLAGS" => "-R#{install_dir}/embedded/lib -L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-      "CFLAGS" => "-I#{install_dir}/embedded/include -L#{install_dir}/embedded/lib -DNO_VIZ"
-    }
-    else
-      raise "Sorry, #{Omnibus.config.solaris_compiler} is not a valid compiler selection."
-    end
-  else
-    {
-      "LDFLAGS" => "-Wl,-rpath #{install_dir}/embedded/lib -L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-      "CFLAGS" => "-I#{install_dir}/embedded/include -L#{install_dir}/embedded/lib"
-    }
-  end
+
+default_env['CFLAGS'] << ' -DNO_VIZ' if platform == "solaris2"
 
 build do
-  command "./configure --prefix=#{install_dir}/embedded", :env => configure_env
+  command "./configure --prefix=#{install_dir}/embedded"
   command "make -j #{max_build_jobs}"
   command "make -j #{max_build_jobs} install"
 end
