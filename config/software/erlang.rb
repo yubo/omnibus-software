@@ -16,19 +16,19 @@
 #
 
 name "erlang"
-version "R15B02"
+version "R16B02"
 
 dependency "zlib"
 dependency "openssl"
 dependency "ncurses"
 
-source :url => "http://www.erlang.org/download/otp_src_R15B02.tar.gz",
-       :md5 => "ccbe5e032a2afe2390de8913bfe737a1"
+source :url => "http://www.erlang.org/download/otp_src_R16B02.tar.gz",
+       :md5 => "ca63bcde0e5ae0f2df9457f97b3115a4"
 
-relative_path "otp_src_R15B02"
+relative_path "otp_src_R16B02"
 
 env = {
-  "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/erlang/include",
+  "CFLAGS" => "-DEPMD6 -L#{install_dir}/embedded/lib -I#{install_dir}/embedded/erlang/include",
   "LDFLAGS" => "-Wl,-rpath #{install_dir}/embedded/lib -L#{install_dir}/embedded/lib -I#{install_dir}/embedded/erlang/include"
 }
 
