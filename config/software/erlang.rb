@@ -28,7 +28,7 @@ source :url => "http://www.erlang.org/download/otp_src_R15B02.tar.gz",
 relative_path "otp_src_R15B02"
 
 env = {
-  "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/erlang/include",
+  "CFLAGS" => "-DEPMD6 -L#{install_dir}/embedded/lib -I#{install_dir}/embedded/erlang/include",
   "LDFLAGS" => "-Wl,-rpath #{install_dir}/embedded/lib -L#{install_dir}/embedded/lib -I#{install_dir}/embedded/erlang/include"
 }
 
