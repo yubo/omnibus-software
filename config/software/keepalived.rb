@@ -20,11 +20,10 @@ version "1.2.10"
 
 dependency "popt"
 
-# The keepalived.org download link was broken when I checked it last (2014-01-21), using github
-#source :url => "http://www.keepalived.org/software/keepalived-1.2.9.tar.gz",
-#       :md5 => "adfad98a2cc34230867d794ebc633492"
-source :url => "https://api.github.com/repos/acassen/keepalived/tarball/v1.2.10",
-       :md5 => "06eecd2c4f497e28f85008dc930b2731"
+source :url => "http://www.keepalived.org/software/keepalived-1.2.10.tar.gz",
+       :md5 => "d838c23d80682650315d1ae447dad48a"
+#source :url => "https://api.github.com/repos/acassen/keepalived/tarball/v1.2.10",
+#       :md5 => "06eecd2c4f497e28f85008dc930b2731"
 
 relative_path "keepalived-1.2.10"
 
