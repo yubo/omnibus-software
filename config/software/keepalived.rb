@@ -16,14 +16,17 @@
 #
 
 name "keepalived"
-version "1.2.9"
+version "1.2.10"
 
 dependency "popt"
 
-source :url => "http://www.keepalived.org/software/keepalived-1.2.9.tar.gz",
-       :md5 => "adfad98a2cc34230867d794ebc633492"
+# The keepalived.org download link was broken when I checked it last (2014-01-21), using github
+#source :url => "http://www.keepalived.org/software/keepalived-1.2.9.tar.gz",
+#       :md5 => "adfad98a2cc34230867d794ebc633492"
+source :url => "https://api.github.com/repos/acassen/keepalived/tarball/v1.2.10",
+       :md5 => "06eecd2c4f497e28f85008dc930b2731"
 
-relative_path "keepalived-1.2.9"
+relative_path "keepalived-1.2.10"
 
 env = {
   "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
@@ -32,10 +35,6 @@ env = {
 }
 
 build do
-  # This is cherry-picked from change
-  # d384ce8b3492b9d76af23e621a20bed8da9c6016 of keepalived, (master
-  # branch), and should be no longer necessary after 1.2.9.
-  patch :source => "keepalived-1.2.9_opscode_centos_5.patch"
   command "./configure --prefix=#{install_dir}/embedded --disable-iconv", :env => env
   command "make -j #{max_build_jobs}", :env => env
   command "make install"
