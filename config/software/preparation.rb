@@ -17,11 +17,16 @@
 
 name "preparation"
 description "the steps required to preprare the build"
+default_version '1.0.0'
 
 build do
   block do
     %w{embedded/lib embedded/bin bin}.each do |dir|
-      FileUtils.mkdir_p(File.expand_path(dir, install_dir))
+      dir_fullpath = File.expand_path(File.join(install_dir, dir))
+      FileUtils.mkdir_p(dir_fullpath)
+      File.open(File.join(dir_fullpath, '.gitkeep'), 'w') do |f|
+        f.print ''
+      end
     end
   end
 end
