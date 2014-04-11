@@ -1,5 +1,5 @@
 #
-# Copyright:: Copyright (c) 2012-2014 Chef Software, Inc.
+# Copyright:: Copyright (c) 2012 Opscode, Inc.
 # License:: Apache License, Version 2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,6 +17,7 @@
 
 name "version-manifest"
 description "generates a version manifest file"
+always_build true
 
 project_name = project.name
 project_build_version = project.build_version
@@ -28,5 +29,7 @@ build do
       f.puts ""
       f.puts Omnibus::Reports.pretty_version_map(project)
     end
+
+    File.open("#{install_dir}/version-manifest.json", "w") { |f| f.puts Omnibus::Reports.json_version_map(project) }
   end
 end
