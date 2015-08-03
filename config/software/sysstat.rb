@@ -1,5 +1,5 @@
 name "sysstat"
-default_version "11.1.4"
+default_version "11.1.3"
 
 source :url => "http://perso.orange.fr/sebastien.godard/sysstat-#{version}.tar.xz",
        :md5 => "3795dd5443efd6bc5d682d597423aa9f"
@@ -20,5 +20,5 @@ build do
        "--disable-nls"].join(" "),
     :env => env)
   command "make -j #{workers}", :env => {"LD_RUN_PATH" => "#{install_dir}/embedded/lib"}
-  command "make install"
+  command "sudo make install"
 end
