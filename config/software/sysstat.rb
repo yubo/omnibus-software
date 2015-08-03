@@ -2,7 +2,7 @@ name "sysstat"
 default_version "11.1.4"
 
 source :url => "http://perso.orange.fr/sebastien.godard/sysstat-#{version}.tar.xz",
-       :md5 => "27385bcb6c1e585de8ba7cb25ac67aef"
+       :md5 => "3795dd5443efd6bc5d682d597423aa9f"
 
 relative_path "sysstat-#{version}"
 
