@@ -34,6 +34,7 @@ env = {
 }
 
 python_configure = ["./configure",
+                    "--enable-unicode=ucs4",
                     "--enable-universalsdk=/",
                     "--prefix=#{install_dir}/embedded"]
 
@@ -52,9 +53,4 @@ build do
   command "make -j #{workers}", :env => env
   command "make install", :env => env
   delete "#{install_dir}/embedded/lib/python2.7/test"
-
-  # There exists no configure flag to tell Python to not compile readline support :(
-  block do
-    FileUtils.rm_f(Dir.glob("#{install_dir}/embedded/lib/python2.7/lib-dynload/readline.*"))
-  end
 end
