@@ -53,4 +53,8 @@ build do
   command "make -j #{workers}", :env => env
   command "make install", :env => env
   delete "#{install_dir}/embedded/lib/python2.7/test"
+  
+  block do
+    FileUtils.rm_f(Dir.glob("#{install_dir}/embedded/lib/python2.7/lib-dynload/readline.*"))
+  end
 end
