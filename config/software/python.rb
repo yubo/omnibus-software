@@ -34,6 +34,7 @@ env = {
 }
 
 python_configure = ["./configure",
+                    "--with-dtrace",
                     "--enable-unicode=ucs4",
                     "--enable-universalsdk=/",
                     "--prefix=#{install_dir}/embedded"]
