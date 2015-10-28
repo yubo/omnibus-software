@@ -17,7 +17,11 @@
 name "cacerts"
 
 # Date of the file is in a comment at the start, or in the changelog
-default_version "2015.09.02"
+default_version "2015.10.28"
+
+version "2015.10.28" do
+    source sha1: "6d7d2f0a4fae587e7431be191a081ac1257d300a"
+end
 
 version "2015.09.02" do
   source md5: "3e0e6f302bd4f5b94040b8bcee0ffe15"
