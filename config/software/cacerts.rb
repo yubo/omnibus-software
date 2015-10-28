@@ -20,7 +20,7 @@ name "cacerts"
 default_version "2015.10.28"
 
 version "2015.10.28" do
-    source sha1: "6d7d2f0a4fae587e7431be191a081ac1257d300a"
+  source md5: "6f41fb0f0c4b4695c2a6296892278141"
 end
 
 version "2015.09.02" do
