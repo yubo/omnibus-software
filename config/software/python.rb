@@ -16,7 +16,7 @@
 #
 
 name "python"
-default_version "2.7.11"
+default_version "2.7.3"
 dependency "ncurses"
 dependency "zlib"
 dependency "openssl"
@@ -24,7 +24,7 @@ dependency "bzip2"
 dependency "libsqlite3"
 
 source :url => "http://python.org/ftp/python/#{version}/Python-#{version}.tgz",
-       :md5 => '6b6076ec9e93f05dd63e47eb9c15728b'
+       :md5 => '2cf641732ac23b18d139be077bd906cd'
 
 relative_path "Python-#{version}"
 
@@ -54,7 +54,7 @@ build do
   command "make -j #{workers}", :env => env
   command "make install", :env => env
   delete "#{install_dir}/embedded/lib/python2.7/test"
-  
+
   block do
     FileUtils.rm_f(Dir.glob("#{install_dir}/embedded/lib/python2.7/lib-dynload/readline.*"))
   end
