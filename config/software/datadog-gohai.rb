@@ -1,5 +1,6 @@
 name "datadog-gohai"
-default_version "last-stable"
+# Pin to a gohai version that doesn't include the processes collector as it requires changes to the Agent's calls to gohai
+default_version "5.7.x-agent"
 
 env = {
   "GOROOT" => "/usr/local/go",
