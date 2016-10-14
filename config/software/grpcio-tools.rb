@@ -7,5 +7,5 @@ dependency "cython"
 
 build do
   ship_license "https://raw.githubusercontent.com/grpc/grpc/master/LICENSE"
-  command "#{install_dir}/embedded/bin/pip install --install-option=\"--install-scripts=#{install_dir}/bin\" #{name}==#{version}", :env => env
+  command "#{install_dir}/embedded/bin/pip install --install-option=\"--install-scripts=#{install_dir}/bin\" #{name}==#{version}"
 end
