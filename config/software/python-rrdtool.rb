@@ -11,6 +11,7 @@ build do
    command "curl -O http://files.directadmin.com/services/9.0/ExtUtils-MakeMaker-6.31.tar.gz", :cwd => "/tmp/"
    command "tar xvzf ExtUtils-MakeMaker-6.31.tar.gz", :cwd => "/tmp/"
    command "perl Makefile.PL", :cwd => "/tmp/ExtUtils-MakeMaker-6.31"
+   command "echo \"building for #{ohai['kernel']['machine']}...\""
    if ohai['kernel']['machine'] == 'i686'
      command "curl -O http://cpansearch.perl.org/src/JHI/perl-5.8.0/thrdvar.h", :cwd => "/usr/lib/perl5/CORE/"
    end
