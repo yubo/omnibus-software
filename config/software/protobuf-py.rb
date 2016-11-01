@@ -3,6 +3,7 @@ default_version "3.1.0"
 
 dependency "python"
 dependency "setuptools"
+dependency "pip"
 dependency "six"
 
 source :url => "https://github.com/google/protobuf/releases/download/v#{version}/protobuf-python-#{version}.tar.gz",
@@ -32,7 +33,7 @@ build do
     # Python lib
     command "#{install_dir}/embedded/bin/python setup.py build --cpp_implementation", :env => env
     command "#{install_dir}/embedded/bin/python setup.py test --cpp_implementation", :env => env
-    command "#{install_dir}/embedded/bin/python setup.py install --cpp_implementation"
+    command "#{install_dir}/embedded/bin/pip install . --install-option=\"--cpp_implementation\""
 
     # We don't need protoc
     delete "#{install_dir}/embedded/lib/libprotoc.*"
