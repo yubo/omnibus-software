@@ -20,23 +20,26 @@ end
 build do
     ship_license "https://raw.githubusercontent.com/google/protobuf/3.1.x/LICENSE"
 
-    # C++ runtime
-    if ohai['platform_family'] == 'rhel'
-        patch :source => "gcc_4_1.patch"
-    end
-    command ["cd .. && ./configure",
-             "--prefix=#{install_dir}/embedded",
-             "--enable-static=no",
-             "--without-zlib"].join(" ")
+    build_options = ""
 
-    command "cd .. && make check"
-    command "cd .. && make -j #{workers}"
-    command "cd .. && make install"
+    # C++ runtime
+    if ohai['platform_family'] != 'rhel'
+        command ["cd .. && ./configure",
+                 "--prefix=#{install_dir}/embedded",
+                 "--enable-static=no",
+                 "--without-zlib"].join(" ")
+
+        command "cd .. && make check"
+        command "cd .. && make -j #{workers}"
+        command "cd .. && make install"
+
+        build_options = "--cpp_implementation"
+    end
 
     # Python lib
-    command "#{install_dir}/embedded/bin/python setup.py build --cpp_implementation", :env => env
-    command "#{install_dir}/embedded/bin/python setup.py test --cpp_implementation", :env => env
-    command "#{install_dir}/embedded/bin/pip install . --install-option=\"--cpp_implementation\""
+    command "#{install_dir}/embedded/bin/python setup.py build #{build_options}", :env => env
+    command "#{install_dir}/embedded/bin/python setup.py test #{build_options}", :env => env
+    command "#{install_dir}/embedded/bin/pip install . --install-option=\"#{build_options}\""
 
     # We don't need protoc
     delete "#{install_dir}/embedded/lib/libprotoc.*"
