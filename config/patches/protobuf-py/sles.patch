@@ -1,7 +1,7 @@
-diff --git a/src/google/protobuf/map_field_inl.h b/src/google/protobuf/map_field_inl.h
+diff --git protobuf-3.1.0/src/google/protobuf/map_field_inl.h protobuf-3.1.0.fixed/src/google/protobuf/map_field_inl.h
 index 01c9b89..2d84b0a 100644
---- a/src/google/protobuf/map_field_inl.h
-+++ b/src/google/protobuf/map_field_inl.h
+--- protobuf-3.1.0/src/google/protobuf/map_field_inl.h
++++ protobuf-3.1.0.fixed/src/google/protobuf/map_field_inl.h
 @@ -339,9 +339,9 @@ MapField<Key, T, kKeyFieldType, kValueFieldType,
           default_enum_value>::Swap(
      MapFieldLiteType* other) {
