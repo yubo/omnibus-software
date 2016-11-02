@@ -21,6 +21,9 @@ build do
     ship_license "https://raw.githubusercontent.com/google/protobuf/3.1.x/LICENSE"
 
     # C++ runtime
+    if ohai['platform_family'] == 'rhel'
+        patch :source => "gcc_4_1.patch"
+    end
     command ["cd .. && ./configure",
              "--prefix=#{install_dir}/embedded",
              "--enable-static=no",
