@@ -32,7 +32,9 @@ build do
                  "--enable-static=no",
                  "--without-zlib"].join(" ")
 
-        command "cd .. && make check"
+        # You might want to temporarily uncomment the following line to check build sanity (e.g. when upgrading the
+        # library) but there's no need to perform the check every time.
+        # command "cd .. && make check"
         command "cd .. && make -j #{workers}"
         command "cd .. && make install"
 
