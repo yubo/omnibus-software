@@ -1,13 +1,3 @@
-From 5f3b046c412e4d9b3361c72997debfc4011cada9 Mon Sep 17 00:00:00 2001
-From: Matt Hauck <matt.hauck@tanium.com>
-Date: Tue, 2 Aug 2016 17:26:54 -0700
-Subject: [PATCH] Fix gcc 4.1.2 compilation of map_field_inl.h
-
-Fixes "error: object missing in reference to '...'" errors from #1035
----
- src/google/protobuf/map_field_inl.h | 34 +++++++++++++++++-----------------
- 1 file changed, 17 insertions(+), 17 deletions(-)
-
 diff --git a/src/google/protobuf/map_field_inl.h b/src/google/protobuf/map_field_inl.h
 index 01c9b89..2d84b0a 100644
 --- a/src/google/protobuf/map_field_inl.h
