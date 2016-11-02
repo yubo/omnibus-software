@@ -27,6 +27,8 @@ build do
     # Note: RHEL5 is equipped with gcc4.1 that is not supported by Protobuf (it actually crashes during the build)
     # so we skip the CPP extension for the time being.
     if ohai['platform_family'] != 'rhel'
+        patch :source => "sles.patch" if ohai['platform_family'] == 'suse'
+
         command ["cd .. && ./configure",
                  "--prefix=#{install_dir}/embedded",
                  "--enable-static=no",
