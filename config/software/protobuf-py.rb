@@ -21,6 +21,7 @@ build do
     ship_license "https://raw.githubusercontent.com/google/protobuf/3.1.x/LICENSE"
 
     build_options = ""
+    pip_build_options = ""
 
     # C++ runtime
     if ohai['platform_family'] != 'rhel'
@@ -34,12 +35,13 @@ build do
         command "cd .. && make install"
 
         build_options = "--cpp_implementation"
+        pip_build_options = "--install-option=\"#{build_options}\""
     end
 
     # Python lib
     command "#{install_dir}/embedded/bin/python setup.py build #{build_options}", :env => env
     command "#{install_dir}/embedded/bin/python setup.py test #{build_options}", :env => env
-    command "#{install_dir}/embedded/bin/pip install . --install-option=\"#{build_options}\""
+    command "#{install_dir}/embedded/bin/pip install . #{pip_build_options}"
 
     # We don't need protoc
     delete "#{install_dir}/embedded/lib/libprotoc.*"
