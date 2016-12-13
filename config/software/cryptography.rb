@@ -1,6 +1,7 @@
 name "cryptography"
 default_version "1.6"
 
+dependency "libffi" # indirectly through the `cffi` python lib cryptography depends on
 dependency "python"
 dependency "pip"
 
