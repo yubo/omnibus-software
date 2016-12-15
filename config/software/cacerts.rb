@@ -20,7 +20,7 @@ name "cacerts"
 default_version "2016.01.20"
 
 version "2016.01.20" do
-  source md5: "782dcde8f5d53b1b9e888fdf113c42b9"
+  source md5: "11713bf9b8c10aca2fb4708f1ba01072"
 end
 
 version "2015.10.28" do
