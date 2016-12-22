@@ -58,9 +58,9 @@ build do
 
    # Pin build deps to known versions
    command "git checkout 7bc8ce51048e2adc11733f90a87b1c02fb7feebe", :env => env, :cwd => "#{Omnibus::Config.cache_dir}/src/datadog-trace-agent/src/github.com/robfig/glock"
-   command "rake restore", :env => env
 
    # Checkout and build datadog-trace-agent
+   command "rake restore", :env => env, :cwd => "#{Omnibus::Config.cache_dir}/src/datadog-trace-agent/src/github.com/DataDog/datadog-trace-agent"
    command "git checkout #{version} && git pull", :env => env, :cwd => "#{Omnibus::Config.cache_dir}/src/datadog-trace-agent/src/github.com/DataDog/datadog-trace-agent"
    command "go build -i -o trace-agent github.com/DataDog/datadog-trace-agent/agent && mv ./trace-agent #{install_dir}/bin/trace-agent", :env => env, :cwd => "#{Omnibus::Config.cache_dir}/src/datadog-trace-agent/src/github.com/DataDog/datadog-trace-agent"
 end
