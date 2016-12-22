@@ -52,7 +52,7 @@ build do
    ship_license "https://raw.githubusercontent.com/DataDog/datadog-trace-agent/#{version}/LICENSE"
    ship_license "https://raw.githubusercontent.com/DataDog/datadog-trace-agent/#{version}/THIRD_PARTY_LICENSES.md"
    # Download datadog-trace-agent without installing
-   command "#{gobin} get -d -u github.com/DataDog/datadog-trace-agent", :env => env
+   command "git clone https://github.com/DataDog/datadog-trace-agent.git $GOPATH/src/github.com/DataDog/datadog-trace-agent", :env => env
    # Checkout datadog-trace-agent's build dependencies
    command "#{gobin} get -d github.com/robfig/glock", :env => env
 
