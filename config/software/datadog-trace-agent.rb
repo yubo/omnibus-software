@@ -15,7 +15,7 @@ build do
    ship_license "https://raw.githubusercontent.com/DataDog/datadog-trace-agent/#{version}/LICENSE"
    ship_license "https://raw.githubusercontent.com/DataDog/datadog-trace-agent/#{version}/THIRD_PARTY_LICENSES.md"
    # download go1.7
-   command "wget -O #{goout} #{gourl}"
+   command "curl #{gourl} -o #{goout}"
    command "mkdir -p #{godir}"
    command "tar zxfv #{goout} -C #{godir}"
 
