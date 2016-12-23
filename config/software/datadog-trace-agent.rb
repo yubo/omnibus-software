@@ -2,7 +2,7 @@ name "datadog-trace-agent"
 default_version "master"
 
 env = {
-  "GOPATH" => "#{Omnibus::Config.cache_dir}/src/#{name}"
+  "GOPATH" => "#{Omnibus::Config.cache_dir}/src/#{name}",
   "GOROOT" => "/usr/local/go17/go/bin"
 }
 
