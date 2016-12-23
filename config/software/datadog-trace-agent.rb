@@ -3,7 +3,7 @@ default_version "master"
 
 env = {
   "GOPATH" => "#{Omnibus::Config.cache_dir}/src/#{name}",
-  "GOROOT" => "/usr/local/go17/go/bin"
+  "GOROOT" => "/usr/local/go17/go"
 }
 
 gourl = "https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz"
