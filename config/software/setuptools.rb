@@ -16,9 +16,10 @@
 #
 
 name "setuptools"
-default_version "28.8.0"
+default_version "0.7.7"
 
 dependency "python"
+
 
 relative_path "setuptools-#{version}"
 
@@ -31,12 +32,10 @@ if ohai['platform'] == 'windows'
     command "\"#{windows_safe_path(install_dir)}\\embedded\\python.exe\" ez_setup.py "
   end
 else
-  source :url => "https://github.com/pypa/setuptools/archive/v#{version}.tar.gz",
-         :sha256 => 'd3b2c63a5cb6816ace0883bc3f6aca9e7890c61d80ac0d608a183f85825a7cc0'
-
+  source :url => "https://pypi.python.org/packages/source/s/setuptools/setuptools-#{version}.tar.gz",
+         :md5 => '0d7bc0e1a34b70a97e706ef74aa7f37f'
   build do
     ship_license "PSFL"
-    command "#{install_dir}/embedded/bin/python bootstrap.py"
     command "#{install_dir}/embedded/bin/python setup.py install --prefix=#{install_dir}/embedded"
   end
 end
