@@ -29,7 +29,8 @@ build do
    command "tar zxfv #{goout} -C #{godir}"
 
    # Put datadog-trace-agent into a valid GOPATH
-   command "mv #{agent_source_dir} $GOPATH/src/github.com/DataDog/datadog-trace-agent", :env => env
+   command "mkdir -p $GOPATH/src/github.com/DataDog/", :env => env
+   command "mv #{agent_source_dir} $GOPATH/src/github.com/DataDog/", :env => env
 
    # Checkout datadog-trace-agent's build dependencies
    command "#{gobin} get -d github.com/robfig/glock", :env => env
