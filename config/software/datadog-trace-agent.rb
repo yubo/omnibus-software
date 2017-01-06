@@ -33,7 +33,7 @@ build do
    command "mv #{agent_source_dir} $GOPATH/src/github.com/DataDog/", :env => env
 
    # Checkout datadog-trace-agent's build dependencies
-   command "#{gobin} get -d github.com/robfig/glock", :env => env
+   command "#{gobin} get -d github.com/robfig/glock", :env => env, cwd => "#{Omnibus::Config.cache_dir}/src/datadog-trace-agent/src/github.com"
 
    # Pin build deps to known versions
    command "git checkout 7bc8ce51048e2adc11733f90a87b1c02fb7feebe", :env => env, :cwd => "#{Omnibus::Config.cache_dir}/src/datadog-trace-agent/src/github.com/robfig/glock"
