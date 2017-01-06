@@ -30,7 +30,7 @@ build do
 
    # Put datadog-trace-agent into a valid GOPATH
    command "mkdir -p $GOPATH/src/github.com/DataDog/", :env => env
-   command "mv #{agent_source_dir} $GOPATH/src/github.com/DataDog/", :env => env
+   command "rm -rf $GOPATH/src/github.com/DataDog/datadog-trace-agent && mv #{agent_source_dir} $GOPATH/src/github.com/DataDog/", :env => env
 
    # Checkout datadog-trace-agent's build dependencies
    command "#{gobin} get -d github.com/robfig/glock", :env => env, :cwd => "#{Omnibus::Config.cache_dir}/src/datadog-trace-agent/src/github.com"
