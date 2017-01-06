@@ -1,10 +1,19 @@
 name "datadog-trace-agent"
-default_version "master"
+source git: 'https://github.com/DataDog/datadog-trace-agent.git'
+
+trace_agent_branch = ENV['TRACE_AGENT_BRANCH']
+if trace_agent_branch.nil? || trace_agent_branch.empty?
+      default_version 'master'
+else
+      default_version trace_agent_branch
+end
 
 gourl = "https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz"
 goout = "go.tar.gz"
 godir = "/usr/local/go17"
 gobin = "#{godir}/go/bin/go"
+
+agent_source_dir = "#{Omnibus::Config.source_dir}/datadog-trace-agent"
 
 env = {
   "GOPATH" => "#{Omnibus::Config.cache_dir}/src/#{name}",
@@ -19,8 +28,9 @@ build do
    command "mkdir -p #{godir}"
    command "tar zxfv #{goout} -C #{godir}"
 
-   # Download datadog-trace-agent without installing
-   command "git clone https://github.com/DataDog/datadog-trace-agent.git $GOPATH/src/github.com/DataDog/datadog-trace-agent", :env => env
+   # Put datadog-trace-agent into a valid GOPATH
+   command "mv #{agent_source_dir} $GOPATH/src/github.com/DataDog/datadog-trace-agent", :env => env
+
    # Checkout datadog-trace-agent's build dependencies
    command "#{gobin} get -d github.com/robfig/glock", :env => env
 
