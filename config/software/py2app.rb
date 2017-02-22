@@ -1,6 +1,6 @@
 name 'py2app'
 
-default_version '0.9.0'
+default_version '0.10.0'
 dependency 'pip'
 
 env = {
@@ -8,5 +8,5 @@ env = {
 }
 
 build do
-  command "#{install_dir}/embedded/bin/pip install -U py2app", :env => env
+  pip "install py2app==#{version}", env: env
 end
