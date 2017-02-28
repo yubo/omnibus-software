@@ -17,5 +17,7 @@ relative_path "vc_redist_policy_msm"
 build do
   # We also need to have these dlls side by side with the `.exe`... I think
   # command "XCOPY /YEH .\\*.dll \"#{windows_safe_path(install_dir)}\\embedded\" /MIR"
+  tgt_dir = "#{Omnibus::Config.source_dir}\\extra_package_files"
+  FileUtils.mkdir_p(tgt_dir) unless File.directory?(tgt_dir)
   command "copy /y .\\*.msm \"#{windows_safe_path(Omnibus::Config.source_dir)}\\extra_package_files\""
 end

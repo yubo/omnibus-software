@@ -11,12 +11,14 @@ default_version "90"
 source :url => "http://192.168.255.32/sp1/Microsoft_VC90_CRT_x86_x64.msm",
        :sha256 => "a3ce9f8b524e8eee31cd0487dead3a89bfa9721d660fdce6ac56b59819e17917"
 
-relative_path "vc_redist_msm"
+#relative_path "vc_redist_msm"
 
 build do
   # We also need to have these dlls side by side with the `.exe`... I think
   # command "XCOPY /YEH .\\*.dll \"#{windows_safe_path(install_dir)}\\embedded\" /MIR"
   tgt_dir = "#{Omnibus::Config.source_dir}\\extra_package_files"
+  puts "Checking for directory #{tgt_dir}"
   FileUtils.mkdir_p(tgt_dir) unless File.directory?(tgt_dir)
+  puts "copying msm to target_dir #{windows_safe_path(Omnibus::Config.source_dir)}\\extra_package_files"
   command "copy /y .\\*.msm \"#{windows_safe_path(Omnibus::Config.source_dir)}\\extra_package_files\""
 end
