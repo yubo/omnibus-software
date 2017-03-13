@@ -1,6 +1,5 @@
 #
-# Copyright:: Copyright (c) 2012-2014 Chef Software, Inc.
-# License:: Apache License, Version 2.0
+# Copyright 2012-2014 Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,58 +15,63 @@
 #
 
 name "curl"
-default_version "7.51.0"
+default_version "7.53.1"
 
-if ohai["platform"] != "windows"
-  dependency "zlib"
-  dependency "openssl"
-  dependency "nghttp2"
-  source :url => "https://curl.haxx.se/download/curl-#{version}.tar.gz",
-         :sha256 => "65b5216a6fbfa72f547eb7706ca5902d7400db9868269017a8888aa91d87977c"
+dependency "zlib"
+dependency "openssl"
+dependency "cacerts"
 
-  relative_path "curl-#{version}"
+license "MIT"
+license_file "COPYING"
+skip_transitive_dependency_licensing true
 
-  build do
-    ship_license "https://raw.githubusercontent.com/bagder/curl/master/COPYING"
-    block do
-      FileUtils.rm_rf(File.join(project_dir, "src/tool_hugehelp.c"))
-    end
+version("7.53.1") { source sha256: "64f9b7ec82372edb8eaeded0a9cfa62334d8f98abc65487da01188259392911d" }
+version("7.51.0") { source sha256: "65b5216a6fbfa72f547eb7706ca5902d7400db9868269017a8888aa91d87977c" }
+version("7.47.1") { source md5: "3f9d1be7bf33ca4b8c8602820525302b" }
+version("7.36.0") { source md5: "643a7030b27449e76413d501d4b8eb57" }
 
-    # curl requires pkg-config that is shipped with the agent
-    env = { "PATH" => "#{install_dir}/embedded/bin" + File::PATH_SEPARATOR + ENV["PATH"] }
-    command ["./configure",
-             "--prefix=#{install_dir}/embedded",
-             "--disable-manual",
-             "--disable-debug",
-             "--enable-optimize",
-             "--disable-ldap",
-             "--disable-ldaps",
-             "--disable-rtsp",
-             "--enable-proxy",
-             "--disable-dependency-tracking",
-             "--enable-ipv6",
-             "--without-libidn",
-             "--without-gnutls",
-             "--without-librtmp",
-             "--without-libssh2",
-             "--with-ssl=#{install_dir}/embedded",
-             "--with-zlib=#{install_dir}/embedded",
-             "--with-nghttp2=#{install_dir}/embedded"].join(" "), env: env
+source url: "https://curl.haxx.se/download/curl-#{version}.tar.gz"
 
-    command "make -j #{workers}", :env => { "LD_RUN_PATH" => "#{install_dir}/embedded/lib" }
-    command "make install"
+relative_path "curl-#{version}"
+
+build do
+  env = with_standard_compiler_flags(with_embedded_path)
+
+  if freebsd?
+    # from freebsd ports - IPv6 Hostcheck patch
+    patch source: "curl-freebsd-hostcheck.patch", plevel: 1, env: env
   end
-else
-  # Compiling is hard... let's ship binaries instead : TODO: react according to platform
-  source :url => "https://s3.amazonaws.com/dd-agent-omnibus/curl4-7.43.0.tar.gz",
-         :md5 => "885daa917d96c9d8278bda39a9295f47",
-         :extract => :seven_zip
 
-  relative_path "curl"
+  delete "#{project_dir}/src/tool_hugehelp.c"
 
-  build do
-    ship_license "https://raw.githubusercontent.com/bagder/curl/master/COPYING"
-
-    copy "cygcurl-4.dll", "\"#{windows_safe_path(install_dir)}\\embedded\\Lib\\cygcurl.dll\""
+  if aix?
+    # otherwise gawk will die during ./configure with variations on the theme of:
+    # "/opt/omnibus-toolchain/embedded/lib/libiconv.a(shr4.o) could not be loaded"
+    env["LIBPATH"] = "/usr/lib:/lib"
   end
+
+  configure_command = [
+    "./configure",
+    "--prefix=#{install_dir}/embedded",
+    "--disable-manual",
+    "--disable-debug",
+    "--enable-optimize",
+    "--disable-ldap",
+    "--disable-ldaps",
+    "--disable-rtsp",
+    "--enable-proxy",
+    "--disable-dependency-tracking",
+    "--enable-ipv6",
+    "--without-libidn",
+    "--without-gnutls",
+    "--without-librtmp",
+    "--with-ssl=#{install_dir}/embedded",
+    "--with-zlib=#{install_dir}/embedded",
+    "--with-ca-bundle=#{install_dir}/embedded/ssl/certs/cacert.pem",
+  ]
+
+  command configure_command.join(" "), env: env
+
+  make "-j #{workers}", env: env
+  make "install", env: env
 end
