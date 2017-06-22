@@ -30,6 +30,8 @@ relative_path "ncurses-5.9"
 env = with_embedded_path()
 env = with_standard_compiler_flags(env, aix: { use_gcc: true })
 
+skip_transitive_dependency_licensing true
+
 if ohai["platform"] == "solaris2"
   # gcc4 from opencsw fails to compile ncurses
   env["PATH"] = "/opt/csw/gcc3/bin:/opt/csw/bin:/usr/local/bin:/usr/sfw/bin:/usr/ccs/bin:/usr/sbin:/usr/bin"
