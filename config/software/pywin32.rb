@@ -1,13 +1,15 @@
 name "pywin32"
-default_version "219"
+default_version "221"
 
 dependency "python"
 dependency "pip"
+source :url => "https://derekwbrown.github.io/pywin32-221-cp27-cp27m-win_amd64.whl",
+       :sha256 => "d0a5ba858dcb08e110a73a25e543b57bbb35c0329685fcee5a9e9dfb31706457"
 
 build do
   relative_path "pywin32-#{version}"
   # Switch on the architecture
-  pip "install pypiwin32==#{version} "\
+  pip "install pywin32-221-cp27-cp27m-win_amd64.whl "\
       "--prefix=#{windows_safe_path(install_dir)}/embedded"
   # pywintypes is patched, it doesn't work on Python > 2.7 otherwise
   # Since we don't install it from source, we can't use the patch option of omnibus
