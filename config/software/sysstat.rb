@@ -6,6 +6,8 @@ source :url => "https://github.com/sysstat/sysstat/archive/v#{version}.tar.gz",
 
 relative_path "sysstat-#{version}"
 
+dependency "lmsensors"
+
 env = {
   "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
   "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
