@@ -2,7 +2,7 @@ name "lmsensors"
 default_version "3.4.0"
 
 source :url => "https://fossies.org/linux/misc/lm_sensors-#{version}.tar.gz",
-       :sha256 => "e334c1c2b06f7290e3e66bdae330a5d36054701ffd47a5dde7a06f9a7402cb4e"
+       :sha256 => "7fa779633ea1ee4391d440de6369d9bdd8eaf38a42dc7daf05522b9640920b38"
 
 relative_path "lm_sensors-#{version}"
 
