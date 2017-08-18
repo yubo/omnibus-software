@@ -6,8 +6,9 @@ source :url => "https://fossies.org/linux/misc/lm_sensors-#{version}.tar.gz",
 
 relative_path "lm_sensors-#{version}"
 
-dependency "flex"
+# order matters here
 dependency "bison"
+dependency "flex"
 
 build do
   ship_license "https://raw.githubusercontent.com/groeck/lm-sensors/master/COPYING.LGPL"
