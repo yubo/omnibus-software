@@ -14,8 +14,8 @@ build do
 
   # install-option not being honored with 3.3.3
   if !File.exists?(supervisord_file)
-    link "#{install_dir}/embedded/bin/supervisord", "#{supervisord_file}", :force
-    link "#{install_dir}/embedded/bin/supervisorctl", "#{supervisorctl_file}", :force
-    link "#{install_dir}/embedded/bin/pidproxy", "#{pidproxy_file}", :force
+    link "#{install_dir}/embedded/bin/supervisord", "#{supervisord_file}", :force => true
+    link "#{install_dir}/embedded/bin/supervisorctl", "#{supervisorctl_file}", :force => true
+    link "#{install_dir}/embedded/bin/pidproxy", "#{pidproxy_file}", :force => true
   end
 end
