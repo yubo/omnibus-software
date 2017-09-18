@@ -14,8 +14,8 @@ build do
 
   # install-option not being honored with 3.3.3
   if !File.exists?(supervisord_file)
-    link "#{install_dir}/embedded/bin/supervisord", "#{supervisord_file}"
-    link "#{install_dir}/embedded/bin/supervisorctl", "#{supervisorctl_file}"
-    link "#{install_dir}/embedded/bin/pidproxy", "#{pidproxy_file}"
+    Omnibus::Util.link "#{install_dir}/embedded/bin/supervisord", "#{supervisord_file}"
+    Omnibus::Util.link "#{install_dir}/embedded/bin/supervisorctl", "#{supervisorctl_file}"
+    Omnibus::Util.link "#{install_dir}/embedded/bin/pidproxy", "#{pidproxy_file}"
   end
 end
