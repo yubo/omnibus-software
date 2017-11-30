@@ -35,4 +35,7 @@ build do
         :acceptable_output => "Reversed (or previously applied) patch detected",
         :target => "/var/cache/omnibus/src/datadog-metro/src/github.com/google/gopacket/pcap/pcap.go"
   command "#{gobin} build -o #{install_dir}/bin/go-metro github.com/DataDog/go-metro", :env => env, :cwd => "#{gopath}"
+
+  # clean up extra go compiler
+  delete godir
 end

@@ -34,4 +34,7 @@ build do
   command "#{gobin} get -d github.com/DataDog/gohai", :env => env # No need to pull latest from remote with `-u` here since the next command checks out and pulls latest
   command "git checkout #{version} && git pull", :env => env, :cwd => "#{gopath}/src/github.com/DataDog/gohai"
   command "cd #{gopath}/src/github.com/DataDog/gohai && #{gobin} run make.go #{gobin} && mv gohai #{install_dir}/bin/gohai", :env => env
+
+  # clean up extra go compiler
+  delete godir
 end
