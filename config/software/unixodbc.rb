@@ -5,6 +5,8 @@ version "2.3.4" do
   source :sha256 => "2e1509a96bb18d248bf08ead0d74804957304ff7c6f8b2e5965309c632421e39"
 end
 
+dependency "libtool"
+
 source :url => "https://downloads.sourceforge.net/unixodbc/unixODBC-#{version}.tar.gz"
 
 build do
