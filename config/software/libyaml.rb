@@ -24,6 +24,8 @@ source :url => "https://bitbucket.org/xi/libyaml/get/#{version}.tar.gz",
 
 relative_path "xi-libyaml-#{version}"
 
+dependency "libtool" unless windows?
+
 env = with_embedded_path()
 env = with_standard_compiler_flags(env)
 
