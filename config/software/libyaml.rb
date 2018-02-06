@@ -31,7 +31,7 @@ env = with_standard_compiler_flags(env)
 
 build do
   ship_license "https://raw.githubusercontent.com/yaml/libyaml/master/LICENSE"
-  command "./bootstrap"
+  command "./bootstrap", :env => env
   command "./configure --prefix=#{install_dir}/embedded", :env => env
   command "make -j #{workers}", :env => env
   command "make -j #{workers} install", :env => env
