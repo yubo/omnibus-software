@@ -1,6 +1,5 @@
 #
-# Copyright:: Copyright (c) 2012-2014 Chef Software, Inc.
-# License:: Apache License, Version 2.0
+# Copyright 2012-2015 Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,23 +15,34 @@
 #
 
 name "libyaml"
-default_version "8a2d1e93b2a2"
+default_version "0.1.7"
 
-source :url => "https://bitbucket.org/xi/libyaml/get/#{version}.tar.gz",
-       :md5 => "601fbd125721460eee302d7d8b058434",
-       :extract => :seven_zip
+license "MIT"
+license_file "LICENSE"
+skip_transitive_dependency_licensing true
 
-relative_path "xi-libyaml-#{version}"
+dependency "config_guess"
 
-dependency "libtool" unless windows?
+version("0.1.7") { source sha256: "8088e457264a98ba451a90b8661fcb4f9d6f478f7265d48322a196cec2480729" }
+version("0.1.6") { source md5: "5fe00cda18ca5daeb43762b80c38e06e" }
 
-env = with_embedded_path()
-env = with_standard_compiler_flags(env)
+source url: "http://pyyaml.org/download/libyaml/yaml-#{version}.tar.gz"
+
+relative_path "yaml-#{version}"
 
 build do
-  ship_license "https://raw.githubusercontent.com/yaml/libyaml/master/LICENSE"
-  command "./bootstrap", :env => env
-  command "./configure --prefix=#{install_dir}/embedded", :env => env
-  command "make -j #{workers}", :env => env
-  command "make -j #{workers} install", :env => env
+  env = with_standard_compiler_flags(with_embedded_path)
+
+  update_config_guess(target: "config")
+
+  configure "--enable-shared", env: env
+
+  # Windows had worse automake/libtool version issues.
+  # Just patch the output instead.
+  if version >= "0.1.6" && windows?
+    patch source: "v0.1.6.windows-configure.patch", plevel: 1, env: env
+  end
+
+  make "-j #{workers}", env: env
+  make "-j #{workers} install", env: env
 end
