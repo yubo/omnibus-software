@@ -70,21 +70,15 @@ else
   dependency "vc_redist"
   dependency "vc_python"
 
-  msi_name = "python-#{version}.amd64.msi"
-  source :url => "https://www.python.org/ftp/python/#{version}/python-#{version}.amd64.msi",
-         :sha256 => "af293df7728b861648162ba0cd4a067299385cb6a3f172569205ac0b33190693"
+  zipfile = "python2.7.14.7z"
+  source :url => "https://github.com/derekwbrown/derekwbrown.github.io/blob/master/python2.7.14.7z",
+         :sha256 => "5d3defc39071c8be9cfc7996c58b797ee6758b4e931ed7e353a2c19aaa1f804d"
 
   build do
     # In case Python is already installed on the build machine well... let's uninstall it
     # (fortunately we're building in a VM :) )
-    command "start /wait msiexec /x #{msi_name} /L uninstallation_logs.txt ADDLOCAL=DefaultFeature /qn"
-
     mkdir "#{windows_safe_path(install_dir)}\\embedded"
-
-    # Installs Python with all the components we need (pip..) under C:\python-omnibus
-    command "start /wait msiexec /i #{msi_name} TARGETDIR="\
-            "\"#{windows_safe_path(install_dir)}\\embedded\" /L uninstallation_logs.txt "\
-            "ADDLOCAL=DefaultFeature  /qn"
+    command "7z x -o #{windows_safe_path(install_dir)}\\embedded #{zipfile}
 
     command "SETX PYTHONPATH \"#{windows_safe_path(install_dir)}\\embedded\""
   end
