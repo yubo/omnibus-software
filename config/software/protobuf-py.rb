@@ -36,7 +36,7 @@ build do
     # You might want to temporarily uncomment the following line to check build sanity (e.g. when upgrading the
     # library) but there's no need to perform the check every time.
     # command "cd .. && make check"
-    command "cd .. && make -j #{workers}"
+    command "cd .. && make -j #{workers}", :env => env
 
     if ohai["platform_family"] == "rhel" && ohai["platform_version"].to_i == 5
       patch :source => "setup-py-no-debug-symbols-for-gcc-41.patch", :plevel => 2
