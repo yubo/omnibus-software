@@ -58,7 +58,7 @@ if ohai["platform"] != "windows"
     command "make install"
   end
 else
-    version "7.59.0"  # still needs to be bumped to >7.64.0
+  version "7.59.0" # still needs to be bumped to >7.64.0
 
   # Compiling is hard... let's ship binaries instead : TODO: react according to platform
   source :url => "https://mirrors.kernel.org/sources.redhat.com/cygwin/x86_64/release/curl/libcurl4/libcurl4-#{version}-1.tar.xz",
