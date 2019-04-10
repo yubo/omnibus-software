@@ -1,14 +1,14 @@
 name "jmxfetch"
 
-if windows?
-  default_version "0.26.1"
-else
-  jmx_version = ENV["JMX_VERSION"]
-  if jmx_version.nil? || jmx_version.empty?
-    raise "Please specify a JMX_VERSION env variable to build."
-  else
-    default_version jmx_version
-  end
+jmx_version = ENV["JMXFETCH_VERSION"]
+if jmx_version.nil? || jmx_version.empty?
+  raise "Please specify a JMXFETCH_VERSION env variable to build."
+end
+
+default_version jmx_version
+
+version "0.27.0" do
+  source sha256: "52aabf81abb4e42adcb28164b263f01b293dda1c686f845d133ebcd128f8b2ee"
 end
 
 version "0.26.1" do
@@ -35,11 +35,7 @@ version "0.23.0" do
   source sha256: "b11f914388128791821380603a06ade9c95b3bbe02be40ebaa8e4edae53d7695"
 end
 
-jar_dir = "#{install_dir}/agent/checks/libs"
-agent_version = ENV["AGENT_VERSION"] || "5"
-if agent_version[0] == "6"
-  jar_dir = "#{install_dir}/bin/agent/dist/jmx"
-end
+jar_dir = "#{install_dir}/bin/agent/dist/jmx"
 
 source :url => "https://dl.bintray.com/datadog/datadog-maven/com/datadoghq/jmxfetch/#{version}/jmxfetch-#{version}-jar-with-dependencies.jar"
 

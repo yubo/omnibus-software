@@ -10,6 +10,6 @@ before_install:
 bundler_args: --jobs 7
 
 env:
-  - JMX_VERSION="0.15.0"
+  - JMXFETCH_VERSION="0.27.0"
 
 script: bundle exec rake travis:ci
