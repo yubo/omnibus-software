@@ -47,7 +47,7 @@ if ohai["platform"] != "windows"
                           "CC=clang",
                           "MACOSX_DEPLOYMENT_TARGET=10.12")
   elsif linux?
-    python_configure.push("--with-assertions")
+    python_configure.push("--with-pydebug")
     python_configure.push("--enable-unicode=ucs4")
   end
 

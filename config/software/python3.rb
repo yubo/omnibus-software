@@ -31,7 +31,8 @@ if ohai["platform"] != "windows"
                           "--with-universal-archs=intel",
                           "--enable-shared")
   elsif linux?
-    python_configure.push("--enable-shared",
+    python_configure.push("--with-pydebug",
+                          "--enable-shared",
                           "--enable-ipv6")
   elsif aix?
     # something here...
