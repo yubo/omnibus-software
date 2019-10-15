@@ -33,4 +33,7 @@ build do
   command "#{gobin} get -d github.com/DataDog/gohai", :env => env # No need to pull latest from remote with `-u` here since the next command checks out and pulls latest
   command "git checkout #{version} && git pull", :env => env, :cwd => "#{Omnibus::Config.cache_dir}/src/datadog-gohai/src/github.com/DataDog/gohai"
   command "cd #{env['GOPATH']}/src/github.com/DataDog/gohai && #{gobin} run make.go #{gobin} && mv gohai #{install_dir}/bin/gohai", :env => env
+
+  # Remove sources, not needed and they'll be refreshed next build.
+  delete "#{Omnibus::Config.cache_dir}/src/datadog-gohai/src"
 end
