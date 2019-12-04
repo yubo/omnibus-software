@@ -21,7 +21,7 @@ name "cacerts"
 default_version "latest"
 
 source url: "https://curl.haxx.se/ca/cacert.pem",
-       sha256: "0d98a1a961aab523c9dc547e315e1d79e887dea575426ff03567e455fc0b66b4",
+       sha256: "0d98a1a961aab523c9dc547e315e1d79e887dea575426ff03567e455fc0b66b4"
 
 relative_path "cacerts-#{version}"
 
