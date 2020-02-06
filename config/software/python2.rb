@@ -48,6 +48,7 @@ if ohai["platform"] != "windows"
       "MACOSX_DEPLOYMENT_TARGET=10.12")
   elsif linux?
     python_configure.push("--enable-unicode=ucs4")
+    env = with_glibc_version(env)
   end
 
   build do

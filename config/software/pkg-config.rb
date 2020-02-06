@@ -34,6 +34,10 @@ relative_path "pkg-config-0.28"
 env = with_embedded_path
 env = with_standard_compiler_flags(env, aix: { use_gcc: true })
 
+if linux?
+  env = with_glibc_version(env)
+end
+
 paths = [ "#{install_dir}/embedded/bin/pkgconfig" ]
 
 build do

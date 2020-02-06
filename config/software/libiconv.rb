@@ -54,6 +54,10 @@ if ohai["platform"] == "solaris2"
   env.merge!(env_more)
 end
 
+if linux?
+  env = with_glibc_version(env)
+end
+
 build do
   patch source: "libiconv-1.14_srclib_stdio.in.h-remove-gets-declarations.patch"
   update_config_guess(target: "build-aux")

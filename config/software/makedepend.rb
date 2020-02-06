@@ -64,6 +64,10 @@ configure_env["PKG_CONFIG_PATH"] = "#{install_dir}/embedded/lib/pkgconfig" +
 # For pkg-config
 configure_env["PATH"] = "#{install_dir}/embedded/bin" + File::PATH_SEPARATOR + ENV["PATH"]
 
+if linux?
+  configure_env = with_glibc_version(configure_env)
+end
+
 build do
   ship_license "https://raw.githubusercontent.com/ioerror/makedepend/master/LICENSE"
   command "./configure --prefix=#{install_dir}/embedded", env: configure_env

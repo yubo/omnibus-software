@@ -34,6 +34,10 @@ build do
 
   # curl requires pkg-config that is shipped with the agent
   env = { "PATH" => "#{install_dir}/embedded/bin" + File::PATH_SEPARATOR + ENV["PATH"] }
+
+  if linux?
+    env = with_glibc_version(env)
+  end
   command ["./configure",
            "--prefix=#{install_dir}/embedded",
            "--disable-manual",

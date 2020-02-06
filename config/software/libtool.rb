@@ -40,6 +40,8 @@ build do
 
   if aix?
     env["M4"] = "/opt/freeware/bin/m4"
+  elsif linux?
+    env = with_glibc_version(env)
   end
 
   mkdir "/tmp/build/embedded"

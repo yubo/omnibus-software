@@ -40,6 +40,10 @@ env = {
   "LD_RUN_PATH" => libdir,
 }
 
+if linux?
+  env = with_glibc_version(env)
+end
+
 build do
   ship_license "https://sourceware.org/git/?p=bzip2.git;a=blob_plain;f=LICENSE;h=81a37eab7a5be1a34456f38adb74928cc9073e9b;hb=HEAD"
   patch source: "makefile_take_env_vars.patch"

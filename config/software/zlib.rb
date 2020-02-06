@@ -74,6 +74,8 @@ build do
       # FreeBSD 10+ gets cranky if zlib is not compiled in a
       # position-independent way.
       env["CFLAGS"] << " -fPIC"
+    elsif linux?
+      env = with_glibc_version(env)
     end
 
     configure env: env

@@ -37,6 +37,10 @@ configure_env =
     }
   end
 
+if linux?
+  configure_env = with_glibc_version(configure_env)
+end
+
 build do
   ship_license "./COPYING"
   command "./configure --prefix=#{install_dir}/embedded", env: configure_env

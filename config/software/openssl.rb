@@ -66,6 +66,8 @@ build do
     env["CFLAGS"] = "-I#{install_dir}/embedded/include"
     env["CPPFLAGS"] = env["CFLAGS"]
     env["CXXFLAGS"] = env["CFLAGS"]
+  elsif linux?
+    env = with_glibc_version(env)
   end
 
   configure_args = [

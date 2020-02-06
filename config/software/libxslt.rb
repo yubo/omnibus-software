@@ -41,6 +41,9 @@ build do
     "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
     "LD_RUN_PATH" => "#{install_dir}/embedded/lib",
   }
+  if linux?
+    env = with_glibc_version(env)
+  end
 
   update_config_guess
 

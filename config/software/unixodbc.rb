@@ -12,6 +12,9 @@ relative_path "unixODBC-#{version}"
 build do
   ship_license "./COPYING"
   env = with_standard_compiler_flags(with_embedded_path)
+  if linux?
+    env = with_glibc_version(env)
+  end
 
   configure_args = [
     "--disable-readline",

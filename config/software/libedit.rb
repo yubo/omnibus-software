@@ -56,6 +56,10 @@ env = case ohai["platform"]
         }
       end
 
+if linux?
+  env = with_glibc_version(env)
+end
+
 build do
   ship_license "https://gist.githubusercontent.com/remh/d001e1be55cd07a88550/raw/742f005f8f9c744a4c7c8b2a0e6c3018546d6d0c/libedit.LICENSE"
   # The patch is from the FreeBSD ports tree and is for GCC compatibility.

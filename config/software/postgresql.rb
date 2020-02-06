@@ -50,6 +50,10 @@ configure_env = {
   "LD_RUN_PATH" => "#{install_dir}/embedded/lib",
 }
 
+if linux?
+  configure_env = with_glibc_version(configure_env)
+end
+
 build do
   command ["./configure",
            "--prefix=#{install_dir}/embedded",

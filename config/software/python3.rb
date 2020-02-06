@@ -51,6 +51,11 @@ if ohai["platform"] != "windows"
               "LDFLAGS" => "-Wl,-rpath,#{install_dir}/embedded/lib -L#{install_dir}/embedded/lib",
             }
           end
+
+    if linux?
+      env = with_glibc_version(env)
+    end
+
     command python_configure.join(" "), env: env
     command "make -j #{workers}", env: env
     command "make install", env: env

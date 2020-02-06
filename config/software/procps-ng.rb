@@ -14,6 +14,10 @@ env = {
   "LD_RUN_PATH" => "#{install_dir}/embedded/lib",
 }
 
+if linux?
+  env = with_glibc_version(env)
+end
+
 build do
   ship_license "https://gitlab.com/procps-ng/procps/raw/master/COPYING"
 
