@@ -59,7 +59,6 @@ if linux?
 end
 
 build do
-  patch source: "libiconv-1.14_srclib_stdio.in.h-remove-gets-declarations.patch"
   update_config_guess(target: "build-aux")
   update_config_guess(target: "libcharset/build-aux")
 
