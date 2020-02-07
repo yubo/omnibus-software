@@ -164,6 +164,8 @@ build do
 
   if linux?
     env = with_glibc_version(env)
+    patch source: "openssl-1.0.1t-hackadog.patch", env: env
+
   end
 
   make "depend", env: env
