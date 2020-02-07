@@ -9,12 +9,13 @@ source url: "http://www.unixodbc.org/unixODBC-#{version}.tar.gz"
 
 relative_path "unixODBC-#{version}"
 
+env = with_standard_compiler_flags(with_embedded_path)
+if linux?
+  env = with_glibc_version(env)
+end
+
 build do
   ship_license "./COPYING"
-  env = with_standard_compiler_flags(with_embedded_path)
-  if linux?
-    env = with_glibc_version(env)
-  end
 
   configure_args = [
     "--disable-readline",

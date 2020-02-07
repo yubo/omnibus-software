@@ -23,21 +23,22 @@ source url: "http://tukaani.org/xz/xz-#{version}.tar.gz",
 
 relative_path "xz-#{version}"
 
+env = {
+  "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
+  "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
+  "LD_RUN_PATH" => "#{install_dir}/embedded/lib",
+}
+
+if linux?
+  env = with_glibc_version(env)
+end
+
 build do
   cmd = [ "./configure",
           "--prefix=#{install_dir}/embedded",
           "--disable-debug",
           "--disable-dependency-tracking"].join(" ")
 
-  env = {
-    "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-    "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-    "LD_RUN_PATH" => "#{install_dir}/embedded/lib",
-  }
-
-  if linux?
-    env = with_glibc_version(env)
-  end
 
   command cmd, env: env
   command "make install", env: env

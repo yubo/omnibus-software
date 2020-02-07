@@ -26,18 +26,19 @@ source url:    "https://curl.haxx.se/download/curl-#{version}.tar.gz",
 
 relative_path "curl-#{version}"
 
+# curl requires pkg-config that is shipped with the agent
+env = { "PATH" => "#{install_dir}/embedded/bin" + File::PATH_SEPARATOR + ENV["PATH"] }
+
+if linux?
+  env = with_glibc_version(env)
+end
+
 build do
   ship_license "https://raw.githubusercontent.com/bagder/curl/master/COPYING"
   block do
     FileUtils.rm_rf(File.join(project_dir, "src/tool_hugehelp.c"))
   end
 
-  # curl requires pkg-config that is shipped with the agent
-  env = { "PATH" => "#{install_dir}/embedded/bin" + File::PATH_SEPARATOR + ENV["PATH"] }
-
-  if linux?
-    env = with_glibc_version(env)
-  end
   command ["./configure",
            "--prefix=#{install_dir}/embedded",
            "--disable-manual",

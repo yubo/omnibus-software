@@ -33,6 +33,23 @@ source url: "https://zlib.net/zlib-#{version}.tar.gz",
 
 relative_path "zlib-#{version}"
 
+# We omit the omnibus path here because it breaks mac_os_x builds by picking
+# up the embedded libtool instead of the system libtool which the zlib
+# configure script cannot handle.
+# TODO: Do other OSes need this?  Is this strictly a mac thing?
+env = with_standard_compiler_flags
+if solaris_10?
+  # For some reason zlib needs this flag on solaris (cargocult warning?)
+  env["CFLAGS"] << " -DNO_VIZ"
+elsif freebsd?
+  # FreeBSD 10+ gets cranky if zlib is not compiled in a
+  # position-independent way.
+  env["CFLAGS"] << " -fPIC"
+elsif linux?
+  env = with_glibc_version(env)
+end
+
+
 build do
   ship_license "https://gist.githubusercontent.com/remh/77877aa00b45c1ebc152/raw/372a65de9f4c4ed376771b8d2d0943da83064726/zlib.license"
   if windows?
@@ -62,22 +79,6 @@ build do
     make(*make_args, env: env)
     make("install", *make_args, env: env)
   else
-    # We omit the omnibus path here because it breaks mac_os_x builds by picking
-    # up the embedded libtool instead of the system libtool which the zlib
-    # configure script cannot handle.
-    # TODO: Do other OSes need this?  Is this strictly a mac thing?
-    env = with_standard_compiler_flags
-    if solaris_10?
-      # For some reason zlib needs this flag on solaris (cargocult warning?)
-      env["CFLAGS"] << " -DNO_VIZ"
-    elsif freebsd?
-      # FreeBSD 10+ gets cranky if zlib is not compiled in a
-      # position-independent way.
-      env["CFLAGS"] << " -fPIC"
-    elsif linux?
-      env = with_glibc_version(env)
-    end
-
     configure env: env
 
     make "-j #{workers}", env: env
