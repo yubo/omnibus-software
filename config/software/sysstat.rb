@@ -23,6 +23,6 @@ build do
        "--prefix=#{install_dir}/embedded",
        "--disable-nls", "--disable-sensors"].join(" "),
     env: env)
-  command "make -j #{workers}", env: { "LD_RUN_PATH" => "#{install_dir}/embedded/lib" }
+  command "make -j #{workers}", env: env
   command "make install"
 end
