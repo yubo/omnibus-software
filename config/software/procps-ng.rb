@@ -18,7 +18,7 @@ env = {
 
 if linux?
   env = with_glibc_version(env)
-  env['PATH'] = "/tmp/build/embedded/bin:#{install_dir}/embedded/bin:#{env['PATH']}"
+  env['PATH'] = "/tmp/build/embedded/bin:#{install_dir}/embedded/bin:#{ENV['PATH']}"
 end
 
 build do
