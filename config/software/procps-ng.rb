@@ -3,6 +3,8 @@ default_version "3.3.16"
 
 ship_source true
 
+dependency "libtool"
+
 source url:    "https://gitlab.com/procps-ng/procps/-/archive/v3.3.16/procps-v#{version}.tar.gz",
        sha256: "7f09945e73beac5b12e163a7ee4cae98bcdd9a505163b6a060756f462907ebbc"
 
