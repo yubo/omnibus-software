@@ -16,13 +16,13 @@
 #
 
 name "libiconv"
-default_version "1.14"
+default_version "1.16"
 
 dependency "libgcc"
 dependency "config_guess"
 
 source url: "http://ftp.gnu.org/pub/gnu/libiconv/libiconv-#{version}.tar.gz",
-       md5: "e34509b1623cec449dfeb73d7ce9c6c6",
+       sha256: "e6a1b1b589654277ee790cce3734f07876ac4ccfaecbee8afa0b649cf529cc04",
        extract: :seven_zip
 
 relative_path "libiconv-#{version}"
