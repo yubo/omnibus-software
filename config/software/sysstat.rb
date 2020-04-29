@@ -1,10 +1,10 @@
 name "sysstat"
-default_version "11.1.3"
+default_version "12.3.2"
 
 ship_source true
 
 source url: "https://github.com/sysstat/sysstat/archive/v#{version}.tar.gz",
-       sha256: "e76dff7fa9246b94c4e1efc5ca858422856e110f09d6a58c5bf6000ae9c9d16e"
+       sha256: "c53b48f0a89cf0f6ea2af67ef0caf44ceed500d37fa7042a871a0541a1ce235d"
 
 relative_path "sysstat-#{version}"
 
