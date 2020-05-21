@@ -1,7 +1,7 @@
 name "jmxfetch"
 
 if windows?
-  default_version "0.26.3"
+  default_version "0.32.1"
 else
   jmx_version = ENV["JMX_VERSION"]
   if jmx_version.nil? || jmx_version.empty?
@@ -9,6 +9,10 @@ else
   else
     default_version jmx_version
   end
+end
+
+version "0.32.1" do
+  source sha256: "01233bc18f91367476b25d5d9f64e275ed3ffe3d27efc067139ce1631e143471"
 end
 
 version "0.26.3" do
