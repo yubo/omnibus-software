@@ -141,7 +141,8 @@ build do
 
   # Out of abundance of caution, we put the feature flags first and then
   # the crazy platform specific compiler flags at the end.
-  configure_args << env["CFLAGS"] << env["LDFLAGS"]
+  # adding -lrt to try to get around libc versioning issues...
+  configure_args << env["CFLAGS"] << "-lrt"  << env["LDFLAGS"]
 
   configure_command = configure_args.unshift(configure_cmd).join(" ")
 
