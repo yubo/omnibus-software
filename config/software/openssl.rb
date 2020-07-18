@@ -57,6 +57,8 @@ build do
   elsif freebsd?
     # Should this just be in standard_compiler_flags?
     env["LDFLAGS"] += " -Wl,-rpath,#{install_dir}/embedded/lib"
+  elsif linux?
+    env["CFLAGS"] = "-D__use_urandom #{env['CFLAGS']}"
   elsif windows?
     # XXX: OpenSSL explicitly sets -march=i486 and expects that to be honored.
     # It has OPENSSL_IA32_SSE2 controlling whether it emits optimized SSE2 code
