@@ -159,15 +159,16 @@ build do
       patch_env["PATH"] = "/opt/freeware/bin:#{env["PATH"]}"
       patch source: "openssl-1.1.1d-do-not-build-docs.patch", env: patch_env
     else
+      if linux?
+        env = with_glibc_version(env)
+        patch source: "openssl-1.0.1t-hackadog.patch", env: env
+        patch source: "openssl-1.1.1f-avoid-getentropy.patch", env: env
+      end
+
       patch source: "openssl-1.1.1d-do-not-build-docs.patch", env: env
     end
   end
 
-  if linux?
-    env = with_glibc_version(env)
-    patch source: "openssl-1.0.1t-hackadog.patch", env: env
-
-  end
 
   make "depend", env: env
   # make -j N on openssl is not reliable
