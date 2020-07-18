@@ -58,7 +58,7 @@ build do
     # Should this just be in standard_compiler_flags?
     env["LDFLAGS"] += " -Wl,-rpath,#{install_dir}/embedded/lib"
   elsif linux?
-    env["CFLAGS"] = "-D__use_urandom #{env['CFLAGS']}"
+    env["CFLAGS"] = "-D__use_urandom -D__disable_getauxval #{env['CFLAGS']}"
   elsif windows?
     # XXX: OpenSSL explicitly sets -march=i486 and expects that to be honored.
     # It has OPENSSL_IA32_SSE2 controlling whether it emits optimized SSE2 code
@@ -165,6 +165,7 @@ build do
         env = with_glibc_version(env)
         patch source: "openssl-1.0.1t-hackadog.patch", env: env
         patch source: "openssl-1.1.1f-avoid-getentropy.patch", env: env
+        patch source: "openssl-1.1.1f-disable-getauxval.patch", env: env
       end
 
       patch source: "openssl-1.1.1d-do-not-build-docs.patch", env: env

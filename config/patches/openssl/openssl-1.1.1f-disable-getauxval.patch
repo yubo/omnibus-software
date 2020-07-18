@@ -1,0 +1,14 @@
+--- openssl-1.1.1f/crypto/uid.c
++++ openssl-1.1.1f/crypto/uid.c
+@@ -32,7 +32,7 @@ int OPENSSL_issetugid(void)
+ # include <sys/types.h>
+
+ # if defined(__GLIBC__) && defined(__GLIBC_PREREQ)
+-#  if __GLIBC_PREREQ(2, 16)
++#  if __GLIBC_PREREQ(2, 16) && !defined(__disable_getauxval)
+ #   include <sys/auxv.h>
+ #   define OSSL_IMPLEMENT_GETAUXVAL
+ #  endif
+--
+2.26.2
+
