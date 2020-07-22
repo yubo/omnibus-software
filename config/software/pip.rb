@@ -17,12 +17,20 @@
 
 name "pip"
 
-default_version "18.1"
+default_version "20.1.1"
 
 dependency "setuptools"
 
+version "20.1.1" do
+  source sha256: "fa20f7632bab63162d281e555e1d40dced21f22b2578709454f9015f279a0144"
+end
+
+version "18.1" do
+  source sha256: "3ff036bbbce30f27b0ba440134defa66a135740c9e3401bd466e7f0d8153147c"
+end
+
+
 source :url => "https://github.com/pypa/pip/archive/#{version}.tar.gz",
-       :sha256 => "3ff036bbbce30f27b0ba440134defa66a135740c9e3401bd466e7f0d8153147c",
        :extract => :seven_zip
 
 relative_path "pip-#{version}"
