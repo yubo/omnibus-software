@@ -16,13 +16,12 @@
 #
 
 name "libyaml"
-default_version "8a2d1e93b2a2"
+default_version "0.1.7"
 
-source :url => "https://bitbucket.org/xi/libyaml/get/#{version}.tar.gz",
-       :md5 => "601fbd125721460eee302d7d8b058434",
-       :extract => :seven_zip
+source :url => "https://github.com/yaml/libyaml/archive/#{version}.tar.gz",
+       :sha256 => "e1884d0fa1eec8cf869ac6bebbf25391e81956aa2970267f974a9fa5e0b968e2"
 
-relative_path "xi-libyaml-#{version}"
+relative_path "libyaml-#{version}"
 
 env = with_embedded_path()
 env = with_standard_compiler_flags(env)
