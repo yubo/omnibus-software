@@ -18,6 +18,7 @@ name "cmake"
 default_version "3.18.1"
 
 dependency "cacerts"
+dependency "ncurses"
 
 license "BSD-3-Clause"
 skip_transitive_dependency_licensing true
