@@ -1,0 +1,25 @@
+From ae1aeee20d9eb73b0b604311df4d0735e206065f Mon Sep 17 00:00:00 2001
+From: Sylvain Baubeau <lebauce@gmail.com>
+Date: Fri, 16 Oct 2020 20:41:37 +0200
+Subject: [PATCH] Disable -Wsuggest-override
+
+---
+ lang/cpp/src/Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lang/cpp/src/Makefile.am b/lang/cpp/src/Makefile.am
+index 1b1de327..fb2a96fc 100644
+--- a/lang/cpp/src/Makefile.am
++++ b/lang/cpp/src/Makefile.am
+@@ -66,7 +66,7 @@ libgpgmepp_la_SOURCES = $(main_sources) $(gpgmepp_headers) context_vanilla.cpp \
+                         $(interface_headers) $(private_gpgmepp_headers)
+ 
+ AM_CPPFLAGS = -I$(top_builddir)/src @GPG_ERROR_CFLAGS@ @LIBASSUAN_CFLAGS@ \
+-              -DBUILDING_GPGMEPP -Wsuggest-override \
++              -DBUILDING_GPGMEPP \
+               -Wzero-as-null-pointer-constant
+ 
+ libgpgmepp_la_LIBADD = ../../../src/libgpgme.la @LIBASSUAN_LIBS@
+-- 
+2.26.2
+
