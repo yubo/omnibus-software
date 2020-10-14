@@ -15,7 +15,7 @@
 #
 
 name "popt"
-default_version "1.16"
+default_version "1.18"
 
 license "MIT"
 license_file "COPYING"
@@ -23,8 +23,15 @@ skip_transitive_dependency_licensing true
 
 dependency "config_guess"
 
-source url: "ftp://anduin.linuxfromscratch.org/BLFS/popt/popt-#{version}.tar.gz",
-       sha256: "e728ed296fe9f069a0e005003c3d6b2dde3d9cad453422a10d6558616d304cc8"
+version "1.18" do
+  source url: "http://ftp.rpm.org/popt/releases/popt-1.x/popt-#{version}.tar.gz",
+         sha256: "5159bc03a20b28ce363aa96765f37df99ea4d8850b1ece17d1e6ad5c24fdc5d1"
+end
+
+version("1.16") do
+  source url: "http://ftp.rpm.org/popt/releases/historical/popt-#{version}.tar.gz",
+         sha256: "e728ed296fe9f069a0e005003c3d6b2dde3d9cad453422a10d6558616d304cc8"
+end
 
 relative_path "popt-#{version}"
 
@@ -33,14 +40,14 @@ build do
 
   update_config_guess
 
-  if version == "1.7.10.1" && (ppc64? || ppc64le?)
-    patch source: "v1.7.10.1.ppc64le-configure.patch", plevel: 1
+  if version == "1.16" && (ppc64? || ppc64le?)
+    patch source: "v1.16.ppc64le-configure.patch", plevel: 1
   end
 
-  # --disable-nls => Disable localization support.
-  command "./configure" \
-          " --prefix=#{install_dir}/embedded" \
-          " --disable-nls", env: env
+  configure_options = [
+    "--disable-nls",
+  ]
+  configure(*configure_options, env: env)
 
   make "-j #{workers}", env: env
   make "install", env: env
