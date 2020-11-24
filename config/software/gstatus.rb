@@ -19,6 +19,7 @@ name "gstatus"
 default_version "1.0.4"
 
 source url: "https://github.com/gluster/gstatus/releases/download/v#{version}/gstatus"
+       md5: "dc700f6ecc3ea03bff70d2181a954953"
 
 relative_path "gstatus"
 
