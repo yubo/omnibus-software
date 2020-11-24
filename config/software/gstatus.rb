@@ -18,7 +18,7 @@
 name "gstatus"
 default_version "1.0.4"
 
-source git: "https://github.com/gluster/gstatus/releases/download/v#{version}/gstatus"
+source url: "https://github.com/gluster/gstatus/releases/download/v#{version}/gstatus"
 
 relative_path "gstatus"
 
