@@ -17,8 +17,6 @@
 name "perl-extutils-makemaker"
 default_version "6.78"
 
-dependency "perl"
-
 version "6.98" do
   source md5: "3eb83b59e33159ecc700bf60ac3c357a"
 end

@@ -21,8 +21,6 @@ license "Artistic-2.0"
 license_file "http://dev.perl.org/licenses/artistic.html"
 skip_transitive_dependency_licensing true
 
-dependency "perl"
-
 version "1.7040" do
   source md5: "4fabebffe22eaaf584b345b082a8a9c1"
 end

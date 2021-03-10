@@ -17,7 +17,6 @@
 name "perl_pg_driver"
 default_version "3.3.0"
 
-dependency "perl"
 dependency "cpanminus"
 dependency "postgresql"
 

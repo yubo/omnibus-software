@@ -35,7 +35,6 @@ license "LGPL-2.1"
 # git://git.guido-flohr.net/perl/libintl-perl.git
 license_file "https://raw.githubusercontent.com/theory/libintl-perl/a92bda4e01cdecbf7e40f78c1444a8ca22e6fdfc/COPYING.LESSER"
 
-dependency "perl"
 dependency "cpanminus"
 
 source url: "http://search.cpan.org/CPAN/authors/id/G/GU/GUIDO/libintl-perl-1.23.tar.gz",

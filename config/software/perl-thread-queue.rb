@@ -17,7 +17,6 @@
 name "perl-thread-queue"
 default_version "3.13"
 
-dependency "perl"
 
 version "3.13" do
   source sha256: "6ba3dacddd2fbb66822b4aa1d11a0a5273cd04c825cb3ff31c20d7037cbfdce8"
@@ -32,6 +31,7 @@ build do
     "INSTALL_BASE" => "#{install_dir}/embedded"
   )
 
+  command "cp /usr/bin/perl #{install_dir}/embedded/bin/perl"
   command "#{install_dir}/embedded/bin/perl Makefile.PL", env: env
 
   make env: env
