@@ -21,7 +21,7 @@ license_file "LICENSE"
 skip_transitive_dependency_licensing true
 
 dependency "zlib"
-dependency "cacerts"
+#dependency "cacerts"
 dependency "makedepend" unless aix? || windows?
 
 default_version "1.1.1i"
