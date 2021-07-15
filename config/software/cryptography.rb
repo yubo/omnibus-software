@@ -10,5 +10,5 @@ dependency "asn1crypto"
 
 build do
   ship_license "https://github.com/pyca/cryptography/blob/master/LICENSE.APACHE"
-  pip "install cryptography==#{version}"
+  pip "install --no-binary :all: cryptography==#{version}"
 end
