@@ -5,7 +5,7 @@ always_build true
 
 env = {
   "GOROOT" => "/usr/local/go",
-  "GOPATH" => "/var/cache/omnibus/src/datadog-metro",
+  "GOPATH" => "#{Omnibus::Config.cache_dir}/src/#{name}",
 }
 
 dependency "libpcap"
@@ -34,17 +34,16 @@ build do
     command "mv gometro-centos6-#{version} #{install_dir}/bin/go-metro.bin"
     command "chmod ug+x #{install_dir}/bin/go-metro.bin"
   else
-    command "mkdir -p /var/cache/omnibus/src/datadog-metro/src/github.com/DataDog", :env => env
-    command "#{gobin} get -v -d github.com/DataDog/go-metro", :env => env, :cwd => "/var/cache/omnibus/src/datadog-metro"
-    command "git pull && git checkout #{version}", :env => env, :cwd => "/var/cache/omnibus/src/datadog-metro/src/github.com/DataDog/go-metro"
-    command "#{gobin} get -v -d github.com/cihub/seelog", :env => env, :cwd => "/var/cache/omnibus/src/datadog-metro"
-    command "#{gobin} get -v -d github.com/google/gopacket", :env => env, :cwd => "/var/cache/omnibus/src/datadog-metro"
-    command "#{gobin} get -v -d github.com/DataDog/datadog-go/statsd", :env => env, :cwd => "/var/cache/omnibus/src/datadog-metro"
-    command "#{gobin} get -v -d gopkg.in/tomb.v2", :env => env, :cwd => "/var/cache/omnibus/src/datadog-metro"
-    command "#{gobin} get -v -d gopkg.in/yaml.v2", :env => env, :cwd => "/var/cache/omnibus/src/datadog-metro"
+    command "#{gobin} get -v -d github.com/DataDog/go-metro", :env => env
+    command "git fetch && git checkout #{version}", :env => env, :cwd => "#{Omnibus::Config.cache_dir}/src/#{name}/src/github.com/DataDog/go-metro"
+    command "#{gobin} get -v -d github.com/cihub/seelog", :env => env, :cwd => "#{Omnibus::Config.cache_dir}/src/#{name}"
+    command "#{gobin} get -v -d github.com/google/gopacket", :env => env, :cwd => "#{Omnibus::Config.cache_dir}/src/#{name}"
+    command "#{gobin} get -v -d github.com/DataDog/datadog-go/statsd", :cwd => "#{Omnibus::Config.cache_dir}/src/#{name}"
+    command "#{gobin} get -v -d gopkg.in/tomb.v2", :env => env, :cwd => "#{Omnibus::Config.cache_dir}/src/#{name}"
+    command "#{gobin} get -v -d gopkg.in/yaml.v2", :env => env, :cwd => "#{Omnibus::Config.cache_dir}/src/#{name}"
     patch :source => "libpcap-static-link.patch", :plevel => 1,
           :acceptable_output => "Reversed (or previously applied) patch detected",
-          :target => "/var/cache/omnibus/src/datadog-metro/src/github.com/google/gopacket/pcap/pcap_unix.go"
-    command "#{gobin} build -o #{install_dir}/bin/go-metro.bin github.com/DataDog/go-metro", :env => env, :cwd => "/var/cache/omnibus/src/datadog-metro"
+          :target => "#{Omnibus::Config.cache_dir}/src/#{name}/src/github.com/google/gopacket/pcap/pcap_unix.go"
+    command "#{gobin} build -o #{install_dir}/bin/go-metro.bin github.com/DataDog/go-metro", :env => env, :cwd => "#{Omnibus::Config.cache_dir}/src/#{name}"
   end
 end
