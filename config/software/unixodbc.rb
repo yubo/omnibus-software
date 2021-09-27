@@ -2,7 +2,7 @@ name "unixodbc"
 default_version "2.3.7"
 
 version "2.3.7" do
-  source sha256: "45f169ba1f454a72b8fcbb82abd832630a3bf93baa84731cf2949f449e1e3e77"
+  source sha256: "a226f9eed19e8519125c4e71c077849de1c2862ea212a25a735bfab9c78cc6b5"
 end
 
 source url: "https://github.com/lurcher/unixODBC/archive/refs/tags/#{version}.tar.gz"
