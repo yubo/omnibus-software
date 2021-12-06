@@ -28,7 +28,7 @@ source url: "https://github.com/pypa/pip/archive/#{version}.tar.gz",
 relative_path "pip-#{version}"
 
 build do
-  ship_license "https://raw.githubusercontent.com/pypa/pip/develop/LICENSE.txt"
+  ship_license "https://raw.githubusercontent.com/pypa/pip/main/LICENSE.txt"
   if ohai["platform"] == "windows"
     command "\"#{windows_safe_path(install_dir)}\\embedded\\python.exe\" setup.py install "\
             "--prefix=\"#{windows_safe_path(install_dir)}\\embedded\""
